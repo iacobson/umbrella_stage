@@ -1,4 +1,5 @@
 defmodule UmbrellaStage.Subscriber do
+  @moduledoc false
   require Logger
 
   def subscribe({consumer_pid, producer_pid, opts}) do

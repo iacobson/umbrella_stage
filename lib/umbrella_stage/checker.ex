@@ -1,4 +1,5 @@
 defmodule UmbrellaStage.Checker do
+  @moduledoc false
   require Logger
 
   def check_consumer_subscriptions(consumer_pid) do

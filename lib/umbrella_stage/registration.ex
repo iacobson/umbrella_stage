@@ -1,4 +1,5 @@
 defmodule UmbrellaStage.Registration do
+  @moduledoc false
   require Logger
 
   def register(:producers, {:error, :not_named}) do

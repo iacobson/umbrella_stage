@@ -31,7 +31,7 @@ defmodule Integration.GenStageSubscribeTest.Producer do
   # SERVER
 
   def init(:ok) do
-    sync_subscribe()
+    umbrella_sync_subscribe()
     {:producer, :no_state}
   end
 
@@ -61,7 +61,7 @@ defmodule Integration.GenStageSubscribeTest.Consumer do
   # SERVER
 
   def init(owner_pid) do
-    sync_subscribe()
+    umbrella_sync_subscribe()
     {:consumer, owner_pid}
   end
 

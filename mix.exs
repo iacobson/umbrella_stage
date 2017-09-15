@@ -14,6 +14,7 @@ defmodule UmbrellaStage.Mixfile do
       homepage_url: @github_url,
       description: description(),
       package: package(),
+      docs: docs()
     ]
   end
 
@@ -26,7 +27,7 @@ defmodule UmbrellaStage.Mixfile do
   end
 
   def description do
-    "Subscribes GenStage consumers to producers across ubmrella apps"
+    "Subscribes GenStage consumers to producers across Elixir Umbrella apps."
   end
 
   def package do
@@ -40,10 +41,15 @@ defmodule UmbrellaStage.Mixfile do
     ]
   end
 
+  def docs do
+    [main: "readme", extras: ["README.md"]]
+  end
+
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:gen_stage, "~> 0.12"}
+      {:gen_stage, "~> 0.12"},
+      {:ex_doc, "~> 0.16", only: :dev, runtime: false}
     ]
   end
 end
