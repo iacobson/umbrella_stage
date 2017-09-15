@@ -23,8 +23,7 @@ end
 - `:type` - is the GenStage type: `:producer`, `:producer_consumer` or `:consumer`  
 - `:producers` - required only for **consumers** and **producer_consumers**. It's the list of producers, the consumer (or producer_consumer) will subscribe to, in the following format: `{ProducerName, [subscription_options]}`
 
-2. C
-Then call `umbrella_sync_subscribe()` in the GenStage `init`
+2. Call `umbrella_sync_subscribe()` in the GenStage `init`
 
 This version of umbrella_stage implements just the [`GenStage.sync_subscribe/3`](https://hexdocs.pm/gen_stage/GenStage.html#sync_subscribe/3) subscription.
 

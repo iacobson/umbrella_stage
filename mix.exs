@@ -36,7 +36,7 @@ defmodule UmbrellaStage.Mixfile do
       licenses: ["MIT"],
       links: %{
         "GitHub" => @github_url,
-        "Blog Post" => "https://medium.com/@iacobson/latest",
+        #"Blog Post" => "https://medium.com/@iacobson/latest",
       }
     ]
   end
