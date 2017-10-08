@@ -12,7 +12,7 @@ Elixir >= 1.4 required
 ```elixir
 def deps do
   [
-    {:umbrella_stage, "~> 0.1.0"}
+    {:umbrella_stage, "~> 0.1.1"}
   ]
 end
 ```
