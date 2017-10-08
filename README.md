@@ -18,6 +18,7 @@ end
 ```
 
 ## Usage
+
 1. Configuration  
 `use` the `UmbrellaStage` in the GenStages servers. It required 2 arguments:  
 - `:type` - is the GenStage type: `:producer`, `:producer_consumer` or `:consumer`  
@@ -27,11 +28,15 @@ end
 
 This version of umbrella_stage implements just the [`GenStage.sync_subscribe/3`](https://hexdocs.pm/gen_stage/GenStage.html#sync_subscribe/3) subscription.
 
+Please check this blog post for more details: https://medium.com/@iacobson/subscribe-genstages-under-umbrella-1fceec366633
+
 ## Examples
+
+A demo app is available on GitHub: https://github.com/iacobson/blog_stockr  
 
 ### Consumer
 ```elixir
-defmodule MyConsumer do
+defmodule App1.MyConsumer do
   use UmbrellaStage,
    type: :consumer,
     producers: [
@@ -47,7 +52,7 @@ end
 
 ### ProducerConsumer
 ```
-defmodule MyProducerConsumer do
+defmodule App2.MyProducerConsumer do
   use UmbrellaStage,
    type: :producer_consumer,
     producers: [
@@ -64,7 +69,7 @@ end
 
 ### Producer
 ```
-defmodule MyProducer do
+defmodule App3.MyProducer do
   use UmbrellaStage,
     type: :producer
 
