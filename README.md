@@ -28,11 +28,10 @@ end
 
 This version of umbrella_stage implements just the [`GenStage.sync_subscribe/3`](https://hexdocs.pm/gen_stage/GenStage.html#sync_subscribe/3) subscription.
 
-Please check this blog post for more details: https://medium.com/@iacobson/subscribe-genstages-under-umbrella-1fceec366633
-
+Please check [this blog post](https://medium.com/@iacobson/subscribe-genstages-under-umbrella-1fceec366633) for more details.
 ## Examples
 
-A demo app is available on GitHub: https://github.com/iacobson/blog_stockr  
+A demo app is available [on GitHub](https://github.com/iacobson/blog_stockr).   
 
 ### Consumer
 ```elixir
