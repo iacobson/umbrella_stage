@@ -50,7 +50,7 @@ end
 ```
 
 ### ProducerConsumer
-```
+```elixir
 defmodule App2.MyProducerConsumer do
   use UmbrellaStage,
    type: :producer_consumer,
@@ -67,7 +67,7 @@ end
 ```
 
 ### Producer
-```
+```elixir
 defmodule App3.MyProducer do
   use UmbrellaStage,
     type: :producer
