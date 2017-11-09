@@ -4,7 +4,7 @@ defmodule UmbrellaStage.Registration do
   alias :mnesia, as: Mnesia
 
   def init() do
-    Mnesia.create_schema([node()])
+    Mnesia.create_schema([node() | Node.list()])
     Mnesia.start()
   end
 
@@ -32,6 +32,8 @@ defmodule UmbrellaStage.Registration do
   end
 
   def find(:producers), do: find(:producers, :_)
+  def find(:consumers), do: find(:consumers, :_, :_)
+
   def find(:producers, name) do
     case lookup({UmbrellaStage.Producers, name, :_}) do
       {:atomic, producers} ->
@@ -42,7 +44,6 @@ defmodule UmbrellaStage.Registration do
     end
   end
 
-  def find(:consumers), do: find(:consumers, :_, :_)
   def find(:consumers, producer_name: producer_name), do: find(:consumers, producer_name, :_)
   def find(:consumers, pid: pid),                     do: find(:consumers, :_, pid)
   def find(:consumers, producer_name, pid) do
