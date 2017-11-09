@@ -19,7 +19,7 @@ defmodule UmbrellaStage do
 
   @doc false
   def sync_subscribe(type: :consumer, producers: producers) do
-    Enum.each(producers, &Registration.register(:consumers, &1))
+    Enum.each(producers, &Registration.register(:consumers, normalize_producer(&1)))
 
     self()
     |> Checker.check_consumer_subscriptions()
@@ -60,4 +60,8 @@ defmodule UmbrellaStage do
         {:error, :not_named}
     end
   end
+
+  defp normalize_producer({producer_name}),       do: {producer_name, []}
+  defp normalize_producer({producer_name, opts}), do: {producer_name, opts}
+  defp normalize_producer(producer_name),         do: {producer_name, []}
 end
