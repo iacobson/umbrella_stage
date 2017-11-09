@@ -4,7 +4,7 @@ defmodule UmbrellaStage.Registration do
   alias :mnesia, as: Mnesia
 
   def init() do
-    Mnesia.create_schema([node() | Node.list()])
+    Mnesia.create_schema(nodes())
     Mnesia.start()
   end
 
@@ -18,14 +18,26 @@ defmodule UmbrellaStage.Registration do
   end
 
   def register(:producers, name) do
-    Mnesia.create_table(UmbrellaStage.Producers, [attributes: [:name, :pid]])
+    Mnesia.create_table(
+      UmbrellaStage.Producers,
+      [
+        ram_copies: nodes(),
+        attributes: [:name, :pid],
+      ]
+    )
     Mnesia.transaction fn ->
       Mnesia.write({UmbrellaStage.Producers, name, self()})
     end
   end
 
   def register(:consumers, {producer_name, opts}) do
-    Mnesia.create_table(UmbrellaStage.Consumers, [attributes: [:producer_name, :pid, :opts]])
+    Mnesia.create_table(
+      UmbrellaStage.Consumers,
+      [
+        ram_copies: nodes(),
+        attributes: [:producer_name, :pid, :opts],
+      ]
+    )
     Mnesia.transaction fn ->
       Mnesia.write({UmbrellaStage.Consumers, producer_name, self(), opts})
     end
@@ -60,5 +72,9 @@ defmodule UmbrellaStage.Registration do
     Mnesia.transaction fn ->
       Mnesia.match_object(match)
     end
+  end
+
+  defp nodes() do
+    [node() | Node.list()]
   end
 end
