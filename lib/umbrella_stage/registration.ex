@@ -42,6 +42,7 @@ defmodule UmbrellaStage.Registration do
     end
   end
 
+  def find(:consumers), do: find(:consumers, :_, :_)
   def find(:consumers, producer_name: producer_name), do: find(:consumers, producer_name, :_)
   def find(:consumers, pid: pid),                     do: find(:consumers, :_, pid)
   def find(:consumers, producer_name, pid) do
