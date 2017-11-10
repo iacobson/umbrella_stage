@@ -1,11 +1,10 @@
 defmodule UmbrellaStage.Checker do
   @moduledoc false
   require Logger
+  alias UmbrellaStage.Registration
 
   def check_consumer_subscriptions(consumer_pid) do
-    Registry.Subscriptions
-    |> Registry.lookup(:consumers)
-    |> Enum.filter(&(match?({^consumer_pid, _}, &1)))
+    Registration.find(:consumers, pid: consumer_pid)
     |> Enum.map(&find_producer/1)
     |> Enum.reject(&(&1 == nil))
   end
@@ -16,15 +15,13 @@ defmodule UmbrellaStage.Checker do
   end
 
   def check_producer_subscribers(producer_pid, producer_name) do
-    Registry.Subscriptions
-    |> Registry.match(:consumers, {producer_name, :_})
+    Registration.find(:consumers, producer_name: producer_name)
     |> Enum.map(&map_subscriptions(producer_pid, &1))
   end
 
-
-  defp find_producer({consumer_pid, {producer_name, opts}}) do
-    case Registry.match(Registry.Subscriptions, :producers, producer_name) do
-      [{producer_pid, ^producer_name}] ->
+  def find_producer({producer_name, consumer_pid, opts}) do
+    case Registration.find(:producers, producer_name) do
+      [{_producer_name, producer_pid}] ->
         {consumer_pid, producer_pid, opts}
       [] ->
         nil
@@ -34,8 +31,7 @@ defmodule UmbrellaStage.Checker do
     end
   end
 
-
-  defp map_subscriptions(producer_pid, {consumer_pid, {_producer_name, opts}}) do
+  defp map_subscriptions(producer_pid, {_producer_name, consumer_pid, opts}) do
     {consumer_pid, producer_pid, opts}
   end
 end

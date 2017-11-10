@@ -7,10 +7,9 @@ defmodule UmbrellaStage.Application do
 
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
-    children = [
-      supervisor(Registry, [:duplicate, Registry.Subscriptions]),
-    ]
+    UmbrellaStage.Registration.init()
 
+    children = []
     opts = [strategy: :one_for_one, name: UmbrellaStage.Supervisor]
     Supervisor.start_link(children, opts)
   end

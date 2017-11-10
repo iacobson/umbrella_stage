@@ -1,11 +1,9 @@
 defmodule UmbrellaStage.CheckerTest do
   use ExUnit.Case
-  alias UmbrellaStage.Checker
-  alias UmbrellaStage.GenStageTest
+  alias UmbrellaStage.{Checker, GenStageTest}
 
   setup do
-    Registry.unregister(Registry.Subscriptions, :producers)
-    Registry.unregister(Registry.Subscriptions, :consumers)
+    UmbrellaStage.Registration.clear
     :ok
   end
 
@@ -109,6 +107,6 @@ defmodule UmbrellaStage.GenStageTest do
   end
 
   defp register({key, value}) do
-    Registry.register(Registry.Subscriptions, key, value)
+    UmbrellaStage.Registration.register(key, value)
   end
 end
